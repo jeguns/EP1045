@@ -6,14 +6,14 @@
 # Archivo de datos y c?digos disponibles en https://github.com/jeguns/EP1045
 
 # ------------------------------------ #
-# Gr?ficos para variables cualitativas #
+# Gráficos para variables cualitativas #
 # ------------------------------------ #
 
 # Lectura de datos
 propinas = read.table("propinas.txt",T)
 attach(propinas)
 
-# Gr?fico de barras verticales usando stats
+# Gráfico de barras verticales usando stats
 
 barplot(table(dia))
 
@@ -23,7 +23,7 @@ barplot(table(dia),
         ylab = "N?mero de consumos",
         main = "Consumos por D?a")
 
-# Gr?fico de barras verticales usando ggplot2
+# Gráfico de barras verticales usando ggplot2
 
 library(ggplot2)
 
@@ -58,17 +58,17 @@ graf.barrasV = ggplot(data = propinas, aes(x = fct_infreq(dia), fill = dia)) +
   theme(legend.position = "none")
 graf.barrasV
 
-# Gr?fico de barras horizontales
+# Gráfico de barras horizontales
 
 graf.barrasH = ggplot(data = propinas, aes(x = fct_infreq(dia), fill = dia)) + 
   geom_bar() + 
   geom_text(stat='count', aes(label = ..count..), hjust = 1.5) +
-  labs(x = "D?a", y = "N?mero de consumos", title = "Consumos por D?a") +
+  labs(x = "Día", y = "Número de consumos", title = "Consumos por Día") +
   theme(legend.position = "none") +
   coord_flip()
 graf.barrasH
 
-# Gr?fico circular
+# Gráfico circular
 
 pie = ggplot(propinas, aes(x = "", fill = factor(dia))) + 
   geom_bar(width = 1) +
@@ -84,7 +84,7 @@ pie = ggplot(propinas, aes(x = "", fill = factor(dia))) +
   labs(fill  = "dia", 
        x     = NULL, 
        y     = NULL, 
-       title = "Distribuci?n de consumos por d?a", 
+       title = "Distribución de consumos por día", 
        caption = "Fuente: Restaurante") 
 pie
 

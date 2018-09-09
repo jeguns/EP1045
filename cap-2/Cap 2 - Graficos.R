@@ -10,7 +10,8 @@
 # ------------------------------------ #
 
 # Lectura de datos
-propinas = read.table("propinas.txt",T)
+propinas       = read.table("propinas.txt",T)
+propinas$dia   = factor(propinas$dia,levels(propinas$dia)[c(2,4,3,1)])
 attach(propinas)
 
 # Gráfico de barras verticales usando stats
@@ -43,12 +44,6 @@ graf.barrasV = ggplot(data = propinas, aes(x = dia, fill = "red")) +
   theme(legend.position = "none")
 graf.barrasV
 
-graf.barrasV = ggplot(data = propinas, aes(x = factor(dia,levels(dia)[c(2,4,3,1)]), fill = "red")) + 
-  geom_bar() +  
-  geom_text(stat='count', aes(label = ..count..), vjust = 2) +
-  labs(x = "D?a", y = "N?mero de consumos", title = "Consumos por D?a") +
-  theme(legend.position = "none") 
-graf.barrasV
 
 library(forcats)
 graf.barrasV = ggplot(data = propinas, aes(x = fct_infreq(dia), fill = dia)) + 
@@ -110,6 +105,9 @@ pie = ggplot(tabla, aes(x = "", y = n, fill = dia))+
        caption = "Fuente: Restaurante")   
 pie
 
+# ----------------------------------------------- #
+# Gráficos para variables cuantitativas discretas #
+# ----------------------------------------------- #
 
 tabla = propinas %>% 
   count(cantidad) %>%

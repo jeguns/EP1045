@@ -17,7 +17,7 @@ propinas = read.table("propinas.txt",T)
 str(propinas)
 
 # Reordenamiento de categorÃ­as
-propinas$dia   = factor(dia,levels(dia)[c(2,4,3,1)])
+propinas$dia   = factor(propinas$dia,levels(propinas$dia)[c(2,4,3,1)])
 
 # AsignaciÃ³n de variables
 attach(propinas)
@@ -29,19 +29,18 @@ p     = fr*100                  # Frecuencias porcentuales
 tabla = cbind(f,fr,p)           # Tabla de frecuencias
 tabla
 
-# Construcción de la tabla usando paquete dplyr
+# Construcci?n de la tabla usando paquete dplyr
 library(dplyr)
 tabla = propinas %>% 
   count(dia) %>%
   mutate(fr = round(prop.table(n),3)) %>%
-  mutate(p  = fr*100) %>%
-  arrange(factor(dia,levels(dia)[c(4,1,3,2)]))
+  mutate(p  = fr*100) 
 tabla
 tabla %>% summarise_at(c("n","fr", "p"), sum)
 
 # Actividad: construya las tablas de frecuencia correspondientes para las variables:
-# Momento del día (orden de las categorías: día, noche)
-# Nivel de satisfacción (orden de las categorías: 5,4,3,2,1)
+# Momento del d?a (orden de las categor?as: d?a, noche)
+# Nivel de satisfacci?n (orden de las categor?as: 5,4,3,2,1)
 
 # ----------------------------------------------------------- #
 # Tablas de frecuencia para variables cuantitativas discretas #

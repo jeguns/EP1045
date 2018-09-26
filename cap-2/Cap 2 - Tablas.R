@@ -80,17 +80,16 @@ k    # redondeo simple
 tic  = r/k
 tic  # redondeo por exceso
 ndec = 2
-tic  = ceiling((tic*10^ndec))/10^ndec
+red.exc = function(num,dec){
+  return(ceiling((num*10^dec))/10^dec)}
+tic  = red.exc(tic,ndec)
 tic
-#tic = 5.31
 min(total)
-tic
 
 cortes    = min(total) + tic*seq(0,9)
-cortes[1] = min(total) - 1e-6
 
 propinas %>% 
-  mutate(category=cut(total, breaks=cortes)) %>%
+  mutate(category=cut(total, breaks=cortes, include.lowest = TRUE)) %>%
   count(category) %>%
   mutate(fr = prop.table(n)) %>%
   mutate(p  = fr*100) %>%

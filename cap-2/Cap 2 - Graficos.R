@@ -1,9 +1,9 @@
 # ==================================== #
-# CAP?TULO II: ESTAD?STICA DESCRIPTIVA #
+# CAPÍTULO II: ESTADÍSTICA DESCRIPTIVA #
 # ==================================== #
 
 # Vamos a utilizar el archivo de datos propinas.txt
-# Archivo de datos y c?digos disponibles en https://github.com/jeguns/EP1045
+# Archivo de datos y códigos disponibles en https://github.com/jeguns/EP1045
 
 # ------------------------------------ #
 # Gráficos para variables cualitativas #
@@ -20,36 +20,41 @@ barplot(table(dia))
 
 barplot(table(dia), 
         col  = "red", 
-        xlab = "D?a",
-        ylab = "N?mero de consumos",
-        main = "Consumos por D?a")
+        xlab = "Día",
+        ylab = "Número de consumos",
+        main = "Consumos por Día")
 
 # Gráfico de barras verticales usando ggplot2
 
 library(ggplot2)
 
+ggplot(data = propinas, aes(x = dia)) + geom_bar()
+
+ggplot(data = propinas, aes(x = dia)) + 
+  geom_bar() 
+
 graf.barrasV = ggplot(data = propinas, aes(x = dia)) + 
   geom_bar() 
 graf.barrasV
 
-graf.barrasV = ggplot(data = propinas) + 
-  aes(x = dia) +
-  geom_bar() 
-graf.barrasV 
-
 graf.barrasV = ggplot(data = propinas, aes(x = dia, fill = "red")) + 
   geom_bar() +
   geom_text(stat='count', aes(label = ..count..), vjust = 2) +
-  labs(x = "D?a", y = "N?mero de consumos", title = "Consumos por D?a") +
+  labs(x = "Día", 
+       y = "Número de consumos", 
+       title = "Consumos por Día",
+       caption = "Fuente: Restaurante") +
   theme(legend.position = "none")
 graf.barrasV
-
 
 library(forcats)
 graf.barrasV = ggplot(data = propinas, aes(x = fct_infreq(dia), fill = dia)) + 
   geom_bar() + 
   geom_text(stat='count', aes(label = ..count..), vjust = 2) + 
-  labs(x = "D?a", y = "N?mero de consumos", title = "Consumos por D?a") +
+  labs(x = "Día", 
+       y = "Número de consumos", 
+       title = "Consumos por Día",
+       caption = "Fuente: Restaurante") +
   theme(legend.position = "none")
 graf.barrasV
 
@@ -58,7 +63,10 @@ graf.barrasV
 graf.barrasH = ggplot(data = propinas, aes(x = fct_infreq(dia), fill = dia)) + 
   geom_bar() + 
   geom_text(stat='count', aes(label = ..count..), hjust = 1.5) +
-  labs(x = "Día", y = "Número de consumos", title = "Consumos por Día") +
+  labs(x = "Día", 
+       y = "Número de consumos", 
+       title = "Consumos por Día",
+       caption = "Fuente: Restaurante") +
   theme(legend.position = "none") +
   coord_flip()
 graf.barrasH
@@ -67,7 +75,7 @@ graf.barrasH
 
 pie = ggplot(propinas, aes(x = "", fill = factor(dia))) + 
   geom_bar(width = 1) +
-  coord_polar(theta = "y") 
+  coord_polar(theta = "y") +
 pie
 
 pie = ggplot(propinas, aes(x = "", fill = factor(dia))) + 
@@ -109,6 +117,8 @@ pie
 # Gráficos para variables cuantitativas discretas #
 # ----------------------------------------------- #
 
+# Gráfico de varas
+
 tabla = propinas %>% 
   count(cantidad) %>%
   mutate(fr = prop.table(n)) %>%
@@ -133,3 +143,98 @@ varas = ggplot(tabla, aes(x = cantidad, y = n)) +
 
 varas
 
+# ----------------------------------------------- #
+# Gráficos para variables cuantitativas continuas #
+# ----------------------------------------------- #
+
+# Histograma
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram()
+
+qplot(total, geom="histogram") 
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram(bins = 10)
+
+qplot(total, geom="histogram", bins=10) 
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram(binwidth = 10)
+
+qplot(total, geom="histogram", binwidth = 10) 
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram(bins = 8,col = I("red"))
+
+qplot(total, geom="histogram", bins = 8, col = I("red")) 
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram(bins = 8,col = I("red"),fill = I("blue"))
+
+qplot(total, geom="histogram", bins = 8, col = I("red"), fill = I("blue"))
+
+ggplot(data=propinas, aes(total)) + 
+  geom_histogram(bins = 8,col = I("red"),fill = I("blue")) +
+  labs(x = "Consumo total",
+       y = "Frecuencia",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+
+qplot(total, geom="histogram", bins = 8, col = I("red"), fill = I("blue"), 
+      xlab = "Consumo total", ylab = "Frecuencia", main = "Distribución de montos de consumo")
+
+# Colores en R --> http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+# Polígono de frecuencias
+
+ggplot(data=propinas, aes(total)) + 
+  geom_freqpoly()
+
+ggplot(data=propinas, aes(total)) + 
+  geom_freqpoly(bins = 10)
+
+ggplot(data=propinas, aes(total)) + 
+  geom_freqpoly(bins = 10, col = I("red"))
+
+ggplot(data=propinas, aes(total)) + 
+  geom_freqpoly(bins = 10, col = I("red"), lwd = 1.25)
+
+ggplot(data=propinas, aes(total)) + 
+  geom_freqpoly(bins = 10, col = I("midnightblue"), lwd = 1.25) +
+  labs(x = "Consumo total",
+       y = "Frecuencia",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+
+# Diagrama de cajas o Boxplot
+
+ggplot(data=propinas, aes(y = total)) + 
+  geom_boxplot()  
+  
+ggplot(data=propinas, aes(y = total)) + 
+  geom_boxplot(col = I("blue"), fill = I("gold"))  
+
+ggplot(data=propinas, aes(y = total)) + 
+  geom_boxplot(col = I("blue"), fill = I("gold")) +
+  labs(x = '',
+       y = "Consumo total",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+
+ggplot(data=propinas, aes(x = dia, y = total)) + 
+  geom_boxplot(col = I("blue"), fill = I("gold")) +
+  labs(x = 'Día',
+       y = "Consumo total",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+
+# Ojiva
+
+ggplot(data=propinas, aes(x=total)) + 
+  geom_step(stat = "ecdf", col = I("blue"), lwd=1.3) + 
+  labs(x = "Consumo total",
+       y = "Frecuencia relativa acumulada",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+  

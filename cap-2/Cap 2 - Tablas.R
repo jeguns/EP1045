@@ -75,17 +75,17 @@ tabla %>% summarise_at(c("n","fr", "p"), sum)
 library(grDevices)
 r    = diff(range(total))
 r
-k    = nclass.Sturges(total)
+k    = nclass.Sturges(total) # 1+3.33*log10(n)
 k    # redondeo simple
 tic  = r/k
 tic  # redondeo por exceso
 ndec = 2
 red.exc = function(num,dec){
-  return(ceiling((num*10^dec))/10^dec)}
+  resultado = ceiling((num*10^dec))/10^dec
+  return(resultado)} # creamos nuestra primera función!
 tic  = red.exc(tic,ndec)
 tic
 min(total)
-
 cortes    = min(total) + tic*seq(0,9)
 
 propinas %>% 

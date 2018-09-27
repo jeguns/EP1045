@@ -75,7 +75,7 @@ graf.barrasH
 
 pie = ggplot(propinas, aes(x = "", fill = factor(dia))) + 
   geom_bar(width = 1) +
-  coord_polar(theta = "y") +
+  coord_polar(theta = "y") 
 pie
 
 pie = ggplot(propinas, aes(x = "", fill = factor(dia))) + 
@@ -207,28 +207,6 @@ ggplot(data=propinas, aes(total)) +
        title = "Distribución de montos de consumo",
        caption = "Fuente: Restaurante")
 
-# Diagrama de cajas o Boxplot
-
-ggplot(data=propinas, aes(y = total)) + 
-  geom_boxplot()  
-  
-ggplot(data=propinas, aes(y = total)) + 
-  geom_boxplot(col = I("blue"), fill = I("gold"))  
-
-ggplot(data=propinas, aes(y = total)) + 
-  geom_boxplot(col = I("blue"), fill = I("gold")) +
-  labs(x = '',
-       y = "Consumo total",
-       title = "Distribución de montos de consumo",
-       caption = "Fuente: Restaurante")
-
-ggplot(data=propinas, aes(x = dia, y = total)) + 
-  geom_boxplot(col = I("blue"), fill = I("gold")) +
-  labs(x = 'Día',
-       y = "Consumo total",
-       title = "Distribución de montos de consumo",
-       caption = "Fuente: Restaurante")
-
 # Ojiva
 
 ggplot(data=propinas, aes(x=total)) + 
@@ -237,4 +215,18 @@ ggplot(data=propinas, aes(x=total)) +
        y = "Frecuencia relativa acumulada",
        title = "Distribución de montos de consumo",
        caption = "Fuente: Restaurante")
+
+# Diagrama de cajas o Boxplot
+
+ggplot(data=propinas, aes(x = dia, y = total)) + 
+  geom_boxplot()
+
+ggplot(data=propinas, aes(x = dia, y = total)) + 
+  geom_boxplot(col = I("blue"), fill = I("gold")) +
+  labs(x = 'Día',
+       y = "Consumo total",
+       title = "Distribución de montos de consumo",
+       caption = "Fuente: Restaurante")
+
+
   

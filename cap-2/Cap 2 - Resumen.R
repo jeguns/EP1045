@@ -145,6 +145,12 @@ propinas %>%
             Med = quantile(total, 0.50),
             P90 = quantile(total, 0.90))
   
+# 33. Determine e interprete el percentil 15 de la propina
+# 34. Determine e interprete los percentiles 20 y 65 de la propina dejada por comensales nocturnos
+# 35. Determine e interprete el decil 7 del consumo total de fumadores
+# 36. Determine e interprete el menor consumo del 20% de hombres que gastaron más
+# 37. Determine e interprete el mayor consumo del 32% de fumadores que pagaron menos propina
+
 # ===================== #
 # Medidas de Dispersión #
 # ===================== #
@@ -153,57 +159,86 @@ propinas %>%
 # Rango #
 # ----- #
 
+# 38. Rango de y
 diff(range(y))
 
+# 39. Rango del consumo total
 diff(range(total))
 
+# 40. Rango del consumo total, por momento de consumo
 aggregate(total ~ momento, propinas, range)
 
+# 41. Rango del consumo total diurno
 propinas %>% 
   select(total) %>% 
   filter(momento == "Dia") %>% 
   summarise(R = diff(range(total)))
 
+# Ejercicios
+# 42. Determine el rango de las propinas durante los días jueves
+# 43. Determine el rango del número de comensales por mesa diurna
+
 # --- #
 # RIC #
 # --- #
 
+# 44. Rango intercuartílico de y
 IQR(y)
 
+# 45. Rango intercuartícilo del consumo total
 IQR(total)
 
+# 46. Rango intercuartílico del consumo total, dividido por nivel de satisfacción
 aggregate(total ~ satisfaccion, propinas, IQR)
 
+# 47. Rango intercuartílico del consumo total para los que están muy insatisfecos
 propinas %>% 
   select(total) %>% 
-  filter(satisfaccion == "3") %>% 
+  filter(satisfaccion == "1") %>% 
   summarise(RIC = IQR(total))
+
+# Ejercicios
+# 48. Determine e interprete el RIC de las propinas de los días sábados y que son dejadas por mujeres
+# 49. Determine e interprete el RIC del consumo total diurno de los jueves
 
 # ------------------- #
 # Desviación estándar #
 # ------------------- #
 
+# 50. Desviación estándar de y
 sd(y)
 
+# 51. Desviación estándar de la cantidad de comensales por mesa
 sd(cantidad)
 
+# 52. Desviación estándar de la cantidad de comensales por mesa, dividido por sexo
 aggregate(cantidad ~ sexo, propinas, sd)
 
+# 53. Desviación estándar de la cantidad de comensales por mesa cuando paga una mujer
 propinas %>% 
   select(cantidad) %>% 
   filter(sexo == "F") %>% 
   summarise(DesvEst = sd(cantidad))
 
+# Ejercicios
+# 54. Determine e interprete la desviación estándar del consumo total
+# 55. Determine e interprete la desviación estándar de las propinas dejadas por aquellos que están muy satisfechos
+# 56. Determine e interprete la desviación estándar del consumo total de hombres, los días viernes por la noche
+
 # -------- #
 # Varianza #
 # -------- #
 
+# 57. Varianza de y
 var(y)
 
+# 58. Varianza de la cantidad de comensales por mesa
 var(cantidad)
 
+# 59. Varianza de la cantidad de comensales por mesa, dividido por sexi
 aggregate(cantidad ~ sexo, propinas, var)
 
+# 60. Varianza de la cantidad de comensales por mesa, cuando paga una mujer
 propinas %>% 
   select(cantidad) %>% 
   filter(sexo == "F") %>% 

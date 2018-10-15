@@ -18,70 +18,99 @@ y = c(3,4,0,-1,3)
 # Media Aritmérica #
 # ---------------- #
 
-mean(y) # media de y
+# 1. La media o promedio de y
+mean(y) 
  
-mean(cantidad) # cantidad promedio de comensales por mesa
+# 2. La cantidad promedio de comensales por mesa
+mean(cantidad) 
 
-# promedio de propina, dividido por sexo
+# 3. El promedio de propina, dividido por sexo
 aggregate(propina ~ sexo, propinas, mean) 
 
+# 4. El promedio de propina pagada por hombres
 library(dplyr)
 propinas %>%
   select(propina) %>%
   filter(sexo == "M") %>% 
   summarise(promedio = mean(propina))
 
-# promedio de propina, dividido por sexo y momento del día
+# 5. El promedio de propina, dividido por sexo y momento del día
 aggregate(propina ~ sexo + momento, propinas, mean) 
 
+# 6. El promedio de propina pagada por mujeres, durante la noche
 propinas %>%
   select(propina) %>%
   filter(sexo == "M" & momento == "Noche") %>% 
   summarise(promedio = mean(propina))
 
-# promedio de propina, dividido por sexo, momento del día y consumos menores a 30 soles
+# 7. El promedio de propina, dividido por sexo, momento del día 
+# y consumos menores a 30 soles
 aggregate(propina ~ sexo + momento + (total < 30), propinas, mean)
 
+# 8. El promedio de propina pagado por mujeres, durante la noche y cuando 
+# el consumo es menor a 30 soles
 propinas %>%
   select(propina) %>%
   filter(sexo == "M" & momento == "Noche" & total < 30) %>% 
   summarise(promedio = mean(propina))
 
 # Ejercicios
-# 1. Obtenga el consumo total medio (19.78594)
-# 2. Obtenga el consumo total medio de los fumadores (20.75634)
-# 3. Obtenga el número promedio de comensales por mesa durante el día (2.411765)
-# 4. Obtenga el monto promedio de propina que dejan los hombres que tienen al menos 3 acompañantes (4.221176)
-
+# 9. Obtenga el consumo total medio (19.78594)
+# 10. Obtenga el consumo total medio de los fumadores (20.75634)
+# 11. Obtenga el número promedio de comensales por mesa durante el día (2.411765)
+# 12. Obtenga el monto promedio de propina que dejan los hombres que tienen al menos 3 acompañantes (4.221176)
 
 # ------- #
 # Mediana #
 # ------- #
 
+# 13. La mediana de y
 median(y)
 
+# 14. La mediana de la cantidad de personas por mesa
+median(cantidad)
+
+# 15. La mediana del consumo total para mujeres que pagan de día
+# y están acompañadas por más de 3 personas en la mesa
 propinas %>%
   select(total) %>%
   filter(sexo == "F" & momento == "Dia" & cantidad > 4) %>% 
   summarise(mediana = median(total))
 
+# Ejercicios
+# 16. Determine e interprete el monto mediano de propina 
+# 17. Determine e interprete la mediana del nivel de satisfacción
+# 18. Determine e interprete la mediana de la propina de los consumos diurnos
+# 19. Determine e interprete el monto mediano del consumo total de los no fumadores
+
 # ---- #
 # Moda #
 # ---- #
 
+# FUNCIÓN MODA
 Mode <- function(x) {
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
 }
 
+# 20. La moda de y
 Mode(y)
 
+# 21. La moda del momento del consumo
 Mode(momento)
 
+# 22. La moda del momento del consumo de mujeres que pagan 
+# menos de 18 soles por consumo
 propinas %>%
   select(momento) %>%
   filter(sexo == "F" & total < 18) %>% 
   summarise(moda = Mode(momento))
+
+# Ejercicios
+# 23. Determine e interprete la moda del status de fumador
+# 24. Determine e interpetre la moda del nivel de satisfaccción
+# 25. Determine e interprete la moda del sexo para los que pagan menos de 5 soles de propina
+# 26. Determine e interprete la moda del dia de consumo de las mujeres
 
 # =================== #
 # Medidas de Posición #
@@ -91,20 +120,28 @@ propinas %>%
 # Percentiles #
 # ----------- #
 
+# 27. Cuantiles de y
 quantile(y)
 
+# 28. Percentil 13 de y
 quantile(y, probs = c(0.13))
 
+# 29. Percentiles 10 y 80 (deciles 1 y 8) del consumo total
 quantile(total, probs = c(0.1, 0.8))
 
+# 30. Perentiles 30 y 60 del consumo total, dividido por sexo
 aggregate(total ~ sexo, propinas, quantile, probs = c(0.3, 0.6))
 
+# 31. Percentiles 30 y 60 del consumo total de hombres
 propinas %>% 
   select(total) %>% 
   filter(sexo == "M") %>% 
   summarise(P30 = quantile(total, 0.30),
             P60 = quantile(total, 0.60))
 
+# 32. Percentiles 25, 50 y 90 del consumo total de mujeres
+# que van de día al restaurante y son acompañadas por más de 
+# 3 personas
 propinas %>%
   select(total) %>%
   filter(sexo == "F" & momento == "Dia" & cantidad > 4) %>% 

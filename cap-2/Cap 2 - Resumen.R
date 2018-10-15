@@ -244,11 +244,28 @@ propinas %>%
   filter(sexo == "F") %>% 
   summarise(Var = var(cantidad))
 
+# Ejercicios
+# 61. Determine e interprete la varianza de las propinas
+# 62. Determine e interprete la varianza del consumo total de los viernes
+# 63. Determine e interprete la varianza del consumo total de hombres, los días viernes por la noche
 
 # --------------------------- #
 # Coeficiente de variabilidad #
 # --------------------------- #
 
+# 64. Coeficiente de variabilidad de y
 sd(y)/abs(mean(y))
 
+# 65. Coeficiente de variabilidad del consumo total
 sd(total)/abs(mean(total))
+
+# 66. Coeficiente de variabilidad de la cantidad de comensales por mesa, cuando paga una mujer
+propinas %>% 
+  select(cantidad) %>% 
+  filter(sexo == "F") %>% 
+  summarise(CV = sd(cantidad)/abs(mean(cantidad)))
+
+# Ejercicios
+# 67. Determine el coeficiente de variabilidad de las propinas de los días sábado
+# 68. Determine el coeficiente de variabilidad del consumo total de los hombres fumadores
+# 69. Determine el coeficiente de variabilidad del consumo total nocturno de las mujeres que no fuman

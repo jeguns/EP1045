@@ -83,4 +83,8 @@ propinas %>%
   filter(sexo == "F" & total < 18) %>% 
   summarise(moda = Mode(momento))
 
+# ---------------------------- #
+# Medidas de Posición #
+# -----------------------------#
+
 

@@ -70,8 +70,7 @@ median(y)
 # 14. La mediana de la cantidad de personas por mesa
 median(cantidad)
 
-# 15. La mediana del consumo total para mujeres que pagan de día
-# y están acompañadas por más de 3 personas en la mesa
+# 15. La mediana del consumo total para mujeres que pagan de día y están acompañadas por más de 3 personas en la mesa
 propinas %>%
   select(total) %>%
   filter(sexo == "F" & momento == "Dia" & cantidad > 4) %>% 
@@ -99,8 +98,7 @@ Mode(y)
 # 21. La moda del momento del consumo
 Mode(momento)
 
-# 22. La moda del momento del consumo de mujeres que pagan 
-# menos de 18 soles por consumo
+# 22. La moda del momento del consumo de mujeres que pagan menos de 18 soles por consumo
 propinas %>%
   select(momento) %>%
   filter(sexo == "F" & total < 18) %>% 
@@ -139,9 +137,7 @@ propinas %>%
   summarise(P30 = quantile(total, 0.30),
             P60 = quantile(total, 0.60))
 
-# 32. Percentiles 25, 50 y 90 del consumo total de mujeres
-# que van de día al restaurante y son acompañadas por más de 
-# 3 personas
+# 32. Percentiles 25, 50 y 90 del consumo total de mujeres  que van de día al restaurante y son acompañadas por más de 3 personas
 propinas %>%
   select(total) %>%
   filter(sexo == "F" & momento == "Dia" & cantidad > 4) %>% 

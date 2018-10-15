@@ -83,8 +83,104 @@ propinas %>%
   filter(sexo == "F" & total < 18) %>% 
   summarise(moda = Mode(momento))
 
-# ------------------- #
+# =================== #
 # Medidas de Posición #
+# =================== #
+
+# ----------- #
+# Percentiles #
+# ----------- #
+
+quantile(y)
+
+quantile(y, probs = c(0.13))
+
+quantile(total, probs = c(0.1, 0.8))
+
+aggregate(total ~ sexo, propinas, quantile, probs = c(0.3, 0.6))
+
+propinas %>% 
+  select(total) %>% 
+  filter(sexo == "M") %>% 
+  summarise(P30 = quantile(total, 0.30),
+            P60 = quantile(total, 0.60))
+
+propinas %>%
+  select(total) %>%
+  filter(sexo == "F" & momento == "Dia" & cantidad > 4) %>% 
+  summarise(Q1  = quantile(total, 0.25),
+            Med = quantile(total, 0.50),
+            P90 = quantile(total, 0.90))
+  
+# ===================== #
+# Medidas de Dispersión #
+# ===================== #
+
+# ----- #
+# Rango #
+# ----- #
+
+diff(range(y))
+
+diff(range(total))
+
+aggregate(total ~ momento, propinas, range)
+
+propinas %>% 
+  select(total) %>% 
+  filter(momento == "Dia") %>% 
+  summarise(R = diff(range(total)))
+
+# --- #
+# RIC #
+# --- #
+
+IQR(y)
+
+IQR(total)
+
+aggregate(total ~ satisfaccion, propinas, IQR)
+
+propinas %>% 
+  select(total) %>% 
+  filter(satisfaccion == "3") %>% 
+  summarise(RIC = IQR(total))
+
+# ------------------- #
+# Desviación estándar #
 # ------------------- #
 
+sd(y)
 
+sd(cantidad)
+
+aggregate(cantidad ~ sexo, propinas, sd)
+
+propinas %>% 
+  select(cantidad) %>% 
+  filter(sexo == "F") %>% 
+  summarise(DesvEst = sd(cantidad))
+
+# -------- #
+# Varianza #
+# -------- #
+
+var(y)
+
+var(cantidad)
+
+aggregate(cantidad ~ sexo, propinas, var)
+
+propinas %>% 
+  select(cantidad) %>% 
+  filter(sexo == "F") %>% 
+  summarise(Var = var(cantidad))
+
+
+# --------------------------- #
+# Coeficiente de variabilidad #
+# --------------------------- #
+
+sd(y)/abs(mean(y))
+
+sd(total)/abs(mean(total))

@@ -107,12 +107,75 @@ el.mayoR(-4,-4)
 # final sobrepasa los 20 m/s o no.
 
 # EJERCICIO 10
-# Cree un programa que lea un vector de tiempos de espera en una cola de banco (en minutos) e indique el 
-# tiempo que debió esperar la "i"-ésima persona. Por ejemplo, si el vector es (3,5,9,10,2,3), la primera 
-# persona no esperó nada, la segunda 3 minutos, la tercera 3+5=8, la cuarta 3+5+9=17 y así sucesivamente.
-# Además debe indicar si la persona espero más de 8 minutos o no.
+# Cree un programa que sume los primeros n números enteros positivos (1,2,3,4,...), 
+# sin utilizar la fórmula S = n(n+1)/2
 
 # EJERCICIO 11
+# Cree un programa que sume los primeros n números impares sin utilizar la fórmula: 
+# 1+3+5+...+(2n-1)=n^2
+
+# EJERCICIO 12
+# Cree un programa que lea un vector de valores e indique cuántos son negativos así 
+# como la suma de éstos
+
+# EJERCICIO 13
+# Cree un programa que lea un vector de valores e indique cuántos son pares y además
+# la suma de los impares
+
+# EJERCICIO 14
+# Cree un programa mediante el cual se ingresa un vector con el nombre de n personas
+# y se imprima lo siguiente:
+# "El nombre de la persona 1 es xxxxx". 
+# Luego realizar lo mismo para las demás personas, hasta la última.
+
+# EJERCICIO 15
+# Cree un programa que lea un vector de datos y calcule su media geométrica. Utilice
+# el comando FOR
+
+# EJERCICIO 16
+# Cree un programa que lea un vector de tiempos de espera en una cola de banco (en 
+# minutos) e indique el tiempo que debió esperar la "i"-ésima persona. Por ejemplo, 
+# si el vector es (3,5,9,10,2,3), la primera persona no esperó nada, la segunda 3 
+# minutos, la tercera 3+5=8, la cuarta 3+5+9=17 y así sucesivamente.
+# Además debe indicar si la persona espero más de 8 minutos o no.
+
+# EJERCICIO 17
 # Cree un programa que lea una fecha y diga si ya pasó o aún no.
 
+# EJERCICIO 18
+# Una tienda descuenta 15% a los clientes que consumen más de 500 soles. 
+# Determine el monto final que paga una persona que realiza una compra en la tienda
+
+# EJERCICIO 19
+# Cree un programa que solo permita ingresar los caracteres "S" o "N".
+
+# EJERCICIO 20
+# Cree un programa que lea 2 números p y q. Luego, debe calcular:
+# p^q, si p<q
+# p*q, si p>q
+# p+q, si p=q
+
+# EJERCICIO 21
+# Cree un programa que permita calcular el factorial de un número
+
+# EJERCICIO 22
+# Cree un programa que calcule la combinatoria de n en x.
+# Pista: Puede usar el programa del ejercicio 21
+
+# EJERCICIO 23
+# Cree un programa que lea tres números y diga si la multiplicación de los dos 
+# primeros es igual al tercero
   
+# EJERCICIO 24
+# La probabilidad de falla de una laptop es igual a 0.02, mientras que la 
+# probabilidad de que fallen x laptops de un total de n es igual a
+# Comb(n,x)*0.02^x*0.98^(n-x)
+# Calcule la probabilidad de que en un total de 20 laptops fallen 4.
+
+# EJERCICIO 25
+# Si durante un minuto entran 2 alumnos por la puerta 1, la probabilidad de que
+# entren x alumnos en y minutos es:
+# (2*y)^x * e^(-2*y) / x!
+# Determine la probabilidad de que ingresen 25 alumnos en un lapso de 10 minutos.
+
+

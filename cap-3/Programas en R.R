@@ -178,4 +178,3 @@ el.mayoR(-4,-4)
 # (2*y)^x * e^(-2*y) / x!
 # Determine la probabilidad de que ingresen 25 alumnos en un lapso de 10 minutos.
 
-

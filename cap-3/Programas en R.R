@@ -132,6 +132,16 @@ el.mayoR(-4,-4)
 # Cree un programa que lea un vector de datos y calcule su media geométrica. Utilice
 # el comando FOR
 
+MG = function(x){
+  P = 1
+  n = length(x)
+  for(i in 1:n){
+    P = P*x[i]
+  }
+  mg = P^(1/n)
+  print(paste("la media geométrica es igual a",mg))
+}
+
 # EJERCICIO 16
 # Cree un programa que lea un vector de tiempos de espera en una cola de banco (en 
 # minutos) e indique el tiempo que debió esperar la "i"-ésima persona. Por ejemplo, 
@@ -139,15 +149,49 @@ el.mayoR(-4,-4)
 # minutos, la tercera 3+5=8, la cuarta 3+5+9=17 y así sucesivamente.
 # Además debe indicar si la persona espero más de 8 minutos o no.
 
+Espera = function(x){
+  S = 0
+  for(i in 1:length(x)){
+    S = S+x[i]
+    print(paste("La persona número",i,"esperó",S,"minutos"))
+  }  
+}
+
 # EJERCICIO 17
 # Cree un programa que lea una fecha y diga si ya pasó o aún no.
+
+fecha = function(x){
+  if(x<Sys.Date()){
+    print(paste("La fecha",x,"ya pasó"))
+  }else{
+    print(paste("La fecha",x,"aún no pasó"))
+  }
+}
+
+fecha("2018-01-12")
+fecha("2018-12-12")
 
 # EJERCICIO 18
 # Una tienda descuenta 15% a los clientes que consumen más de 500 soles. 
 # Determine el monto final que paga una persona que realiza una compra en la tienda
 
+precio = function(x){
+  if(x>500){
+    pf = 0.85*x
+  }else{
+    pf = x
+  }
+  print(paste("El precio final a pagar es de",pf,"soles"))
+}
+
 # EJERCICIO 19
 # Cree un programa que solo permita ingresar los caracteres "S" o "N".
+
+programa = function(x){
+  if((x!='S') && (x!='N')){
+    print(paste("Solo puede ingresar los valores S o N"))
+  }  
+}
 
 # EJERCICIO 20
 # Cree un programa que lea 2 números p y q. Luego, debe calcular:
@@ -155,22 +199,72 @@ el.mayoR(-4,-4)
 # p*q, si p>q
 # p+q, si p=q
 
+calculo = function(p,q){
+  if(p<q){R=p^q}
+  if(p>q){R=p*q}
+  if(p==q){R=p+q}
+  return(R)
+}
+
 # EJERCICIO 21
 # Cree un programa que permita calcular el factorial de un número
+
+facto = function(x){
+  P = 1
+  for(i in 1:x){
+    P = P*i
+  }
+  print(paste(x,"!=",P))
+}
+
+Facto = function(x){
+  P = 1
+  for(i in 1:x){
+    P = P*i
+  }
+  return(P)
+}
+
 
 # EJERCICIO 22
 # Cree un programa que calcule la combinatoria de n en x.
 # Pista: Puede usar el programa del ejercicio 21
 
+comb = function(n,x){
+  C = Facto(n)/(Facto(x)*Facto(n-x))
+  print(paste("La combinatoria de",n,"en",x,"es igual a",C))
+}
+
+Comb = function(n,x){
+  C = Facto(n)/(Facto(x)*Facto(n-x))
+  return(C)
+}
+
 # EJERCICIO 23
 # Cree un programa que lea tres números y diga si la multiplicación de los dos 
 # primeros es igual al tercero
-  
+
+program = function(a,b,c){
+  if(a*b==c){
+    print(paste("La multiplicación de",a,"*",b,"es igual a",c))
+  }else{
+    print(paste("La multiplicación de",a,"*",b,"no es igual a",c))
+    
+  }
+}
+
 # EJERCICIO 24
 # La probabilidad de falla de una laptop es igual a 0.02, mientras que la 
 # probabilidad de que fallen x laptops de un total de n es igual a
 # Comb(n,x)*0.02^x*0.98^(n-x)
 # Calcule la probabilidad de que en un total de 20 laptops fallen 4.
+
+binomial = function(n,x){
+  Prob = Comb(n,x)*0.02^x*0.98^(n-x)
+  print(paste("La probabilidad de que en un total de",n,"laptops fallen",x,"es igual a", Prob))
+}
+
+binomial(20,4)
 
 # EJERCICIO 25
 # Si durante un minuto entran 2 alumnos por la puerta 1, la probabilidad de que
@@ -178,3 +272,8 @@ el.mayoR(-4,-4)
 # (2*y)^x * e^(-2*y) / x!
 # Determine la probabilidad de que ingresen 25 alumnos en un lapso de 10 minutos.
 
+poisson = function(x,y){
+  Prob= (2*y)^x*exp(-2*y)/Facto(x)
+  print(paste("La probabilidad de que ingresen",x,"alumnos en un lapso de",y,"minutos es igual a",Prob))
+}
+poisson(25,10)
